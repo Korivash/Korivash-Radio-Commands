@@ -18,7 +18,11 @@
 |---|---|
 | `!np` | Current song — pulses the Now Playing bar on stream |
 | `!nowplaying` | Same as `!np` |
+| `!song` | Same as `!np` |
 | `!queue` | Next 5 tracks coming up |
+| `!request [keyword]` | Find a track matching a keyword — e.g. `!request dark` |
+| `!songlist` | All track names + link to site |
+| `!playlist` | Same as `!songlist` |
 
 ---
 
@@ -134,6 +138,48 @@ Challenge another viewer to a Phonk Points battle.
 | `!quote` | Everyone | Pull a random quote |
 | `!quote [id]` | Everyone | Pull a specific quote by number |
 | `!delquote [id]` | Mods | Delete a quote |
+
+---
+
+## 🎵 Track Rating
+
+Vote on the current track. One vote / one rating per user per song — resets when the track changes.
+
+| Command | Cooldown | What it does |
+|---|---|---|
+| `!fire` | once per track | Vote 🔥 fire |
+| `!mid` | once per track | Vote 😐 mid |
+| `!trash` | once per track | Vote 💀 trash |
+| `!rate [1-10]` | 30s per user | Give a numeric score — running average shown in chat |
+
+---
+
+## 🌙 Vibe Commands
+
+Bot replies with a random on-brand line from each category. 15s global cooldown each.
+
+| Command | Vibe |
+|---|---|
+| `!vibe` | General atmosphere |
+| `!bass` | Bass-focused |
+| `!nightdrive` | Night drive mode |
+| `!anime` | Anime arc energy |
+| `!rage` | Full send mode |
+| `!chill` | Low tempo, high feeling |
+| `!scene` | Cinematic one-liner (30s cooldown) |
+
+---
+
+## 📱 Socials
+
+| Command | What it does |
+|---|---|
+| `!discord` | Discord invite |
+| `!website` | music.korivash.com |
+| `!socials` | Discord + website |
+| `!youtube` | YouTube channel link |
+| `!tiktok` | TikTok link |
+| `!spotify` | Spotify link |
 
 ---
 
