@@ -214,12 +214,15 @@ The bot auto-moderates chat 24/7. **Mods, VIPs, and subs are fully exempt.**
 
 | Filter | Trigger |
 |---|---|
-| Link filter | Any URL not on the approved whitelist |
+| Link filter | Any URL not on the approved whitelist — catches bare domains (`example.com`) and `www.` prefixes in addition to `https://` |
 | Caps filter | Message >70% caps (12+ chars) |
 | Symbol/emoji spam | Message >50% symbols or emojis |
 | Long message | Over 300 characters |
-| Repeat spam | Same message sent twice in a row |
-| Banned words | Configurable blocked phrases |
+| Repeat spam | Same or near-duplicate message (>80% word overlap with last 3 messages) |
+| Banned words | Configurable blocked phrases — managed at runtime via `!addbanword` / `!removebanword` |
+| Rate limiting | >5 messages/60s → soft warning · >8 messages/60s → timeout |
+| Zalgo / Unicode abuse | Excessive combining characters (>5) — detects zalgo text and Unicode spam |
+| First-message link | New viewer's very first message containing a link → instant 5-minute timeout (skips warning) |
 
 **Approved domains (always allowed):**
 `twitch.tv` · `discord.gg` · `music.korivash.com` · `korivash.com` · `youtube.com` · `youtu.be` · `imgur.com` · `clips.twitch.tv`
@@ -229,28 +232,36 @@ The bot auto-moderates chat 24/7. **Mods, VIPs, and subs are fully exempt.**
 | Strike | Action |
 |---|---|
 | 1st | ⚠️ Warning in chat — message deleted |
-| 2nd | ⏱️ 60-second timeout — message deleted |
-| 3rd | ⏱️ 10-minute timeout — message deleted |
+| 2nd | ⏱️ **5-minute** timeout — message deleted |
+| 3rd | ⏱️ **1-hour** timeout — message deleted |
 | 4th | 🔨 Permanent ban |
+
+> **First-message link exception:** A brand-new viewer posting a link on their very first message goes directly to Strike 2 (5-minute timeout), bypassing the warning.
 
 ### Mod Commands
 
-| Command | What it does |
-|---|---|
-| `!permit @user` | Allow a user to post one link for 60 seconds |
-| `!resetoffenses @user` | Clear a user's strike count |
-| `!timeout @user [s]` | Timeout a user (default 600s) |
-| `!ban @user [reason]` | Permanently ban a user |
-| `!unban @user` | Remove a ban |
-| `!slow [seconds]` | Enable slow mode (default 30s) |
-| `!slowoff` | Disable slow mode |
-| `!subonly` | Subscriber-only mode on |
-| `!subnonly` | Subscriber-only mode off |
-| `!emoteonly` | Emote-only mode on |
-| `!emoteonlyoff` | Emote-only mode off |
-| `!clear` | Delete all messages in chat |
-| `!shoutout @user` | Shoutout another streamer with their link |
-| `!so @user` | Shorthand for `!shoutout` |
+| Command | Who | What it does |
+|---|---|---|
+| `!permit @user` | Mods | Allow a user to post one link for 60 seconds |
+| `!resetoffenses @user` | Mods | Clear a user's strike count |
+| `!offenses @user` | Mods | Check a user's current strike count without resetting |
+| `!addbanword <phrase>` | Mods | Add a word or phrase to the live banned-word list |
+| `!removebanword <phrase>` | Mods | Remove a word or phrase from the banned-word list |
+| `!banwords` | Mods | List all currently active banned words |
+| `!timeout @user [s]` | Mods | Timeout a user (default 600s) |
+| `!ban @user [reason]` | Mods | Permanently ban a user |
+| `!unban @user` | Mods | Remove a ban |
+| `!slow [seconds]` | Mods | Enable slow mode (default 30s) |
+| `!slowoff` | Mods | Disable slow mode |
+| `!subonly` | Mods | Subscriber-only mode on |
+| `!subnonly` | Mods | Subscriber-only mode off |
+| `!emoteonly` | Mods | Emote-only mode on |
+| `!emoteonlyoff` | Mods | Emote-only mode off |
+| `!clear` | Mods | Delete all messages in chat |
+| `!shoutout @user` | Mods | Shoutout another streamer with their link |
+| `!so @user` | Mods | Shorthand for `!shoutout` |
+
+> **Banned words persist** in localStorage across browser sessions. They are lost only if the OBS browser source is cleared or reset.
 
 ---
 
@@ -273,8 +284,10 @@ The bot auto-moderates chat 24/7. **Mods, VIPs, and subs are fully exempt.**
 | **Sub exempt** | Subs bypass all auto-filters and can post whitelisted links freely |
 
 - Phonk Points persist across streams but reset if the browser source is cleared
-- Strike counts reset with each browser session (OBS restart)
+- Strike counts persist in localStorage and survive OBS restarts (reset only if browser source is cleared)
+- Banned words persist in localStorage — use `!banwords` to see the current active list
 - Duel expires after 60 seconds if the challenged user doesn't respond
+- Rate limit windows are rolling 60-second windows, not per-minute buckets
 
 ---
 
