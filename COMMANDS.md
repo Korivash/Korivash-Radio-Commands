@@ -1,6 +1,6 @@
 <div align="center">
 
-# 📻 Korivash Radio — Chat Commands
+# Korivash Radio — Chat Commands
 
 **All commands work in Twitch chat · Responses posted by [@Korivash_Radio](https://twitch.tv/korivash)**
 
@@ -20,9 +20,6 @@
 | `!nowplaying` | Same as `!np` |
 | `!song` | Same as `!np` |
 | `!queue` | Next 5 tracks coming up |
-| `!request [keyword]` | Find a track matching a keyword — e.g. `!request dark` |
-| `!songlist` | All track names + link to site |
-| `!playlist` | Same as `!songlist` |
 
 ---
 
@@ -35,7 +32,7 @@
 | `!socials` | Discord + website in one message |
 | `!uptime` | How long the stream has been live |
 | `!lore` | A random piece of Korivash Radio lore |
-| `!commands` | Posts a link to this page |
+| `!commands` | Post this command list in chat |
 
 ---
 
@@ -50,7 +47,7 @@ Earn points just by hanging out. Spend them to affect the live stream.
 | `!lurk` | **+5 pts** |
 | `!hype` | **+2 pts** per use |
 
-### 🏆 Ranks
+### Ranks
 
 | Rank | Points needed |
 |---|---|
@@ -74,7 +71,7 @@ Earn points just by hanging out. Spend them to affect the live stream.
 
 ## 🎲 Gambling
 
-> Risk your Phonk Points for a chance to multiply them. 10s cooldown per user.
+> Risk your Phonk Points for a chance to multiply them. 10s per-user cooldown.
 
 ### `!gamble [amount]`
 Coin flip — **Win = 2×** your bet · Lose = gone
@@ -90,83 +87,47 @@ Coin flip — **Win = 2×** your bet · Lose = gone
 
 ---
 
-## ⚔️ Duel
-
-Challenge another viewer to a Phonk Points battle.
-
-| Command | What it does |
-|---|---|
-| `!duel @user amount` | Challenge someone — they have 60s to respond |
-| `!accept` | Accept the duel — coin flip decides winner |
-| `!decline` | Turn down the duel |
-
-> Winner takes the full pot. One pending duel at a time.
-
----
-
-## 🎉 Giveaway
-
-| Command | Who | What it does |
-|---|---|---|
-| `!giveaway start` | Mods | Opens the giveaway |
-| `!giveaway pick` | Mods | Picks a random winner |
-| `!giveaway end` | Mods | Closes without picking |
-| `!enter` | Everyone | Enter the active giveaway |
-
----
-
 ## 🔥 Engagement
 
 | Command | What it does |
 |---|---|
 | `!hype` | +1 to the hype meter. At **15 votes** the overlay flashes. Earns **+2 pts**. |
-| `!vibe` | Posts a random phonk atmosphere line |
-| `!fire` | Vote the current track 🔥 fire — tally shown in chat |
-| `!trash` | Vote the current track 💀 trash — tally shown in chat |
+| `!fire` | Vote the current track 🔥 fire |
+| `!mid` | Vote the current track 😐 mid |
+| `!trash` | Vote the current track 💀 trash |
+| `!rate [1-10]` | Give the current track a numeric score — running average shown in chat |
 | `!lurk` | Acknowledge your lurk + earn **+5 pts** |
 
-> `!fire` / `!trash` — once per track per viewer · resets when the song changes  
-> `!hype` — 60s cooldown per user · meter resets 3s after hitting 15
-
----
-
-## 📖 Quotes
-
-| Command | Who | What it does |
-|---|---|---|
-| `!addquote [text]` | Mods | Save a quote to the library |
-| `!quote` | Everyone | Pull a random quote |
-| `!quote [id]` | Everyone | Pull a specific quote by number |
-| `!delquote [id]` | Mods | Delete a quote |
-
----
-
-## 🎵 Track Rating
-
-Vote on the current track. One vote / one rating per user per song — resets when the track changes.
-
-| Command | Cooldown | What it does |
-|---|---|---|
-| `!fire` | once per track | Vote 🔥 fire |
-| `!mid` | once per track | Vote 😐 mid |
-| `!trash` | once per track | Vote 💀 trash |
-| `!rate [1-10]` | 30s per user | Give a numeric score — running average shown in chat |
+> `!fire` / `!mid` / `!trash` — once per track per viewer · resets when the song changes
+> `!rate` — 30s per-user cooldown · resets when the song changes
+> `!hype` — 60s per-user cooldown · meter resets 3s after hitting 15
 
 ---
 
 ## 🌙 Vibe Commands
 
-Bot replies with a random on-brand line from each category. 15s global cooldown each.
+Bot replies with a random on-brand line. 15s global cooldown (30s for `!scene`).
 
 | Command | Vibe |
 |---|---|
-| `!vibe` | General atmosphere |
-| `!bass` | Bass-focused |
+| `!vibe` | General phonk atmosphere |
+| `!bass` | Bass-focused energy |
 | `!nightdrive` | Night drive mode |
 | `!anime` | Anime arc energy |
 | `!rage` | Full send mode |
 | `!chill` | Low tempo, high feeling |
-| `!scene` | Cinematic one-liner (30s cooldown) |
+| `!scene` | Cinematic one-liner |
+
+---
+
+## 💥 Overlay Effects
+
+Spend Phonk Points to affect the live stream visually. 120s per-user cooldown.
+
+| Command | Cost | Effect |
+|---|---|---|
+| `!glitch` | **100 pts** | Scanline glitch overlay for 3 seconds |
+| `!rain` | **50 pts** | Neon rain on screen for 30 seconds |
 
 ---
 
@@ -183,48 +144,36 @@ Bot replies with a random on-brand line from each category. 15s global cooldown 
 
 ---
 
-## 💥 Overlay Effects
+## 🤖 AI Chat
 
-Spend Phonk Points to affect the live stream visually. 120s cooldown per user.
-
-| Command | Cost | Effect |
+| Command | Cooldown | What it does |
 |---|---|---|
-| `!glitch` | **100 pts** | Scanline glitch for 3 seconds |
-| `!rain` | **50 pts** | Neon rain on screen for 30 seconds |
+| `@Korivash_Radio [question]` | 30s global | Ask the bot anything — answers in Korivash Radio style |
+| `!ask [question]` | 30s global | Same as @mentioning the bot |
 
----
-
-## 🔧 Custom Commands
-
-Mods can build custom bot responses on the fly. Supports `{user}` to mention the person who typed the command.
-
-| Command | What it does |
-|---|---|
-| `!addcom !name response` | Create a new command |
-| `!editcom !name new response` | Update an existing command |
-| `!delcom !name` | Delete a command |
+> Powered by Gemini 2.5 Flash. The bot has full personality context — ask about the music, phonk culture, or anything stream-related.
 
 ---
 
 ## 🛡️ Moderation
 
-The bot auto-moderates chat 24/7. **Mods, VIPs, and subs are fully exempt.**
+The bot auto-moderates chat 24/7. **Mods, VIPs, and subs are fully exempt from all filters.**
 
 ### Auto-Filters
 
 | Filter | Trigger |
 |---|---|
-| Link filter | Any URL not on the approved whitelist — catches bare domains (`example.com`) and `www.` prefixes in addition to `https://` |
-| Caps filter | Message >70% caps (12+ chars) |
+| Link filter | Any URL not on the approved whitelist — catches `https://`, `www.`, and bare domains like `example.com` |
+| Caps filter | Message >70% capital letters (12+ chars) |
 | Symbol/emoji spam | Message >50% symbols or emojis |
 | Long message | Over 300 characters |
-| Repeat spam | Same or near-duplicate message (>80% word overlap with last 3 messages) |
-| Banned words | Configurable blocked phrases — managed at runtime via `!addbanword` / `!removebanword` |
-| Rate limiting | >5 messages/60s → soft warning · >8 messages/60s → timeout |
-| Zalgo / Unicode abuse | Excessive combining characters (>5) — detects zalgo text and Unicode spam |
-| First-message link | New viewer's very first message containing a link → instant 5-minute timeout (skips warning) |
+| Repeat spam | Near-duplicate message (>80% word overlap with last 3 messages) |
+| Banned words | Runtime-configurable blocked phrases |
+| Rate limiting | >5 messages/60s → soft warning · >8 messages/60s → moderation action |
+| Zalgo / Unicode abuse | Excessive combining characters (>5) — catches zalgo text and Unicode spam |
+| First-message link | Brand-new viewer's very first message containing a link → instant 5-minute timeout (skips warning step) |
 
-**Approved domains (always allowed):**
+**Approved domains (always allowed for everyone):**
 `twitch.tv` · `discord.gg` · `music.korivash.com` · `korivash.com` · `youtube.com` · `youtu.be` · `imgur.com` · `clips.twitch.tv`
 
 ### Escalating Punishments
@@ -236,15 +185,15 @@ The bot auto-moderates chat 24/7. **Mods, VIPs, and subs are fully exempt.**
 | 3rd | ⏱️ **1-hour** timeout — message deleted |
 | 4th | 🔨 Permanent ban |
 
-> **First-message link exception:** A brand-new viewer posting a link on their very first message goes directly to Strike 2 (5-minute timeout), bypassing the warning.
+> **First-message link exception:** A brand-new viewer posting a link on their very first message skips Strike 1 and goes directly to Strike 2 (5-minute timeout). This targets raid bots that always post links on their first message.
 
 ### Mod Commands
 
 | Command | Who | What it does |
 |---|---|---|
-| `!permit @user` | Mods | Allow a user to post one link for 60 seconds |
+| `!permit @user` | Mods | Allow a user to post one link freely for 60 seconds |
 | `!resetoffenses @user` | Mods | Clear a user's strike count |
-| `!offenses @user` | Mods | Check a user's current strike count without resetting |
+| `!offenses @user` | Mods | Check a user's strike count without resetting it |
 | `!addbanword <phrase>` | Mods | Add a word or phrase to the live banned-word list |
 | `!removebanword <phrase>` | Mods | Remove a word or phrase from the banned-word list |
 | `!banwords` | Mods | List all currently active banned words |
@@ -258,36 +207,58 @@ The bot auto-moderates chat 24/7. **Mods, VIPs, and subs are fully exempt.**
 | `!emoteonly` | Mods | Emote-only mode on |
 | `!emoteonlyoff` | Mods | Emote-only mode off |
 | `!clear` | Mods | Delete all messages in chat |
-| `!shoutout @user` | Mods | Shoutout another streamer with their link |
+| `!shoutout @user` | Mods | Shoutout another streamer with their channel link |
 | `!so @user` | Mods | Shorthand for `!shoutout` |
 
-> **Banned words persist** in localStorage across browser sessions. They are lost only if the OBS browser source is cleared or reset.
+> Banned words persist in localStorage across browser sessions. They reset only if the OBS browser source is fully cleared.
 
 ---
 
 ## ⚙️ Automatic Features
 
-- **Auto-announcements** — Rotating message every hour: Discord · website · support info
-- **Raid alerts** — Overlay banner + welcome message for incoming raids
-- **Sub & cheer alerts** — On-screen banner; name added to the live supporter strip
-- **Passive points** — 10 pts every 5 minutes for active chatters
-- **Auto-moderation** — Filters run 24/7, no mod input required
+These run on their own — no commands needed.
+
+| Feature | How it works |
+|---|---|
+| **Auto now-playing** | Bot posts the current song name in chat each time the track changes |
+| **Hype messages** | Random phonk hype line posted every 5–8 minutes |
+| **Chat questions** | Random engagement question posted every 10–15 minutes |
+| **Soft promo** | Rotating Discord/website mention every 20–30 minutes |
+| **Auto-announcements** | Hourly message rotating through: Discord · website · support info |
+| **Raid alerts** | Overlay banner + welcome message for incoming raids |
+| **Sub & cheer alerts** | On-screen banner; name added to the live supporter strip |
+| **Passive points** | +10 pts every 5 minutes for active chatters |
 
 ---
 
-## 📝 Notes
+## 📝 Glossary
 
 | Term | Meaning |
 |---|---|
-| **Global cooldown** | One person triggers it for everyone |
-| **Per user cooldown** | Each viewer has their own independent timer |
-| **Sub exempt** | Subs bypass all auto-filters and can post whitelisted links freely |
+| **Global cooldown** | One person triggers it for the whole chat |
+| **Per-user cooldown** | Each viewer has their own independent timer |
+| **Sub exempt** | Subs bypass all auto-filters and can post links from the whitelist freely |
 
-- Phonk Points persist across streams but reset if the browser source is cleared
-- Strike counts persist in localStorage and survive OBS restarts (reset only if browser source is cleared)
-- Banned words persist in localStorage — use `!banwords` to see the current active list
-- Duel expires after 60 seconds if the challenged user doesn't respond
-- Rate limit windows are rolling 60-second windows, not per-minute buckets
+- Phonk Points persist across streams but reset if the OBS browser source is cleared
+- Strike counts are in-memory — they reset on OBS browser source reload
+- `!fire` / `!mid` / `!trash` / `!rate` votes all reset when the track changes
+- The hype meter resets 3 seconds after reaching 15
+
+---
+
+## 🚧 Coming Soon
+
+Features in development — not yet live.
+
+| Feature | Status |
+|---|---|
+| `!duel @user amount` — viewer vs viewer Phonk Points battle | In progress |
+| `!giveaway start/pick/end` + `!enter` — mod-run giveaways | In progress |
+| `!addquote` / `!quote` — save and recall memorable moments | Planned |
+| `!request [track]` — request a song from the playlist | Planned |
+| `!watchtime` — see how long you've been watching | Planned |
+| `!streak` — daily login streak with bonus points | Planned |
+| YouTube chat commands | Pending YouTube API review |
 
 ---
 
