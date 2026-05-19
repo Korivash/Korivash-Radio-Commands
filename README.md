@@ -154,7 +154,6 @@ All of these run with no input required.
 - **Scene rotation** — `scene-rotator.js` polls `now-playing.json` every 3s, cycles through 23 visual scenes
 - **Music watcher** — `phonk-watcher.ps1` strips album art and syncs MP3s to IIS automatically
 
-See **[CLAUDE.md](./CLAUDE.md)** for the full technical change log.
 
 ---
 
