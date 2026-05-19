@@ -141,18 +141,47 @@ All of these run with no input required.
 
 ---
 
-## Architecture (for developers)
+## How the system works
 
-- **No build step** — React 18 + Babel Standalone loaded from CDN, JSX transpiled in-browser
-- **IIS static site** — `C:\inetpub\music.korivash.com\`
-- **Source files** — `C:\Users\Administrator\Desktop\Twitch Scenes\`
-- **Audio** — OBS Media Source (ffmpeg) → Twitch RTMP. Browser audio only on the public website.
-- **Bot** — Twitch IRC via WebSocket inside the OBS browser source (app.jsx)
-- **Points API** — Node.js + MariaDB, PM2 process `points-api`
-- **Bot monitor** — Node.js, PM2 process `bot-monitor` (token refresh, watcher health, relay health)
-- **Multistream** — FFmpeg RTMP relay → Twitch + YouTube simultaneously
-- **Scene rotation** — `scene-rotator.js` polls `now-playing.json` every 3s, cycles through 23 visual scenes
-- **Music watcher** — `phonk-watcher.ps1` strips album art and syncs MP3s to IIS automatically
+Korivash Radio is a fully self-contained broadcast and web stack running on a dedicated Windows server. Here is how everything fits together from top to bottom.
+
+### Music source
+
+All tracks are original MP3 files produced by Korivash. A background file watcher monitors the music folder around the clock. When a new MP3 is dropped in, the watcher automatically strips any embedded album art (so it never surfaces in browser media overlays), copies the clean file to the web server, and rebuilds the track manifest — all within a few seconds. No manual steps required.
+
+### OBS broadcast
+
+OBS runs on the same server and handles the entire broadcast pipeline. A custom Lua script manages the shuffle playlist directly inside OBS — it loads all MP3s at startup, performs a Fisher-Yates shuffle, plays each track through OBS's internal audio engine, and writes a small JSON file to the web server every time the song changes. This JSON file (`now-playing.json`) is the heartbeat of the whole system: every other component reads from it.
+
+Audio goes: MP3 file → OBS internal audio → FFmpeg encoder → RTMP. No Windows audio service is involved, which means the stream works reliably on a headless server with no sound card.
+
+### Multistream
+
+Instead of streaming directly to one platform, OBS sends its output to a local FFmpeg relay running on the same machine. The relay duplicates the single stream and forwards it to both Twitch and YouTube simultaneously. This means OBS only encodes once and the relay handles the fan-out, keeping CPU usage lower than encoding twice.
+
+### Web player
+
+The public website at [music.korivash.com](https://music.korivash.com) is a static single-page app built with React 18, served over HTTPS. It polls `now-playing.json` every 3 seconds to stay in sync with what OBS is actually playing — same song, same position in the track. Visitors can listen directly in their browser without installing anything. The page is fully functional even while OBS is mid-stream.
+
+### Visual scenes
+
+The stream overlay uses 23 distinct visual scenes, each with its own colour palette, background art, and branding (BL00D MOON, V01D WALKER, G0LD CHA1N, etc.). A scene rotator reads `now-playing.json` and advances to the next scene on every track change, cycling through all 23 in order before repeating any. The current scene position is persisted across browser source reloads so OBS refreshes never reset the cycle mid-rotation.
+
+### Chat bot
+
+The Twitch bot (`@Korivash_Radio`) runs entirely inside the OBS browser source — it connects to Twitch IRC over a WebSocket, reads every chat message, and handles all commands and auto-moderation in real time. No separate bot server is needed. The bot's OAuth token is refreshed automatically by a Node.js health monitor process before it expires, so the bot stays connected indefinitely without manual re-authentication.
+
+### Phonk Points economy
+
+Point balances are stored in a MariaDB database, accessed through a lightweight Node.js API server running in the background. The browser source reads and writes to this API for every points transaction — earning, spending, gambling, and the leaderboard. This means point balances survive OBS restarts and browser source reloads.
+
+### AI responses
+
+When a viewer @mentions the bot or uses `!ask`, the message is sent to Google's Gemini API with a full personality prompt that defines the Korivash Radio voice, brand knowledge, and response style. The reply comes back in under a second and is posted to Twitch chat by the bot account. The AI has no access to the server or stream controls — it is purely a conversational layer.
+
+### Health monitoring
+
+A background Node.js monitor runs checks every 60 seconds: it validates the bot's OAuth token and refreshes it if it is about to expire, confirms the music watcher is still running and restarts it if not, and checks that the multistream relay process is alive and restarts it if it has crashed. This keeps the full system running unattended across reboots and unexpected failures.
 
 
 ---
